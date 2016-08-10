@@ -5,7 +5,7 @@ package com.golf.golfnation.common;
  */
 public interface Constants {
 
-    public static final String ROOT_API = "http://dynobranding.com/client/golfnation/api/";
+    public static final String ROOT_API = "http://golfnationapp.com/app/api/";
     public static final String SIGN_IN_URL = ROOT_API + "signin.php?user_name=%s&password=%s";
     public static final String SOCIAL_SIGNIN_URL = ROOT_API + "signin.php?user_name=%s&sign_up_type=%d";
     public static final String REGISTER_URL = ROOT_API + "signup.php?sign_up_type=0&email=%s&password=%s";

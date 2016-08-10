@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginTop="30dp">
+    <TextView
+        android:id="@+id/player1_name"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="90dp"
+        android:text="David Krbec"
+        android:layout_centerVertical="true"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_toLeftOf="@+id/cb_p1_win"
+        android:layout_width="90dp"
+        android:inputType="number"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content"
+        />
+    <CheckBox
+        android:id="@+id/cb_p1_win"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:width="60dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/cb_p1_win"/>
+</RelativeLayout>

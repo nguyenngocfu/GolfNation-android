@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_height="match_parent" tools:context="com.golf.golfnation.game.ManageGameFragment">
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MANAGE GAMES"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textAllCaps="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Fees:"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="$100"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp">
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PLAYERS"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_toLeftOf="@+id/lbl_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="90dp"
+            android:text="PRIZE"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/lbl_cb"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="60dp"
+            android:text="WON"
+
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_members"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider"/>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        android:text="Pay Winner"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/round_bluebg"/>
+</LinearLayout>

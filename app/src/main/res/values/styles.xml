@@ -1,0 +1,43 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimaryDark">@android:color/background_dark</item>
+        <item name="android:windowBackground">@drawable/bg</item>
+        <item name="android:textViewStyle">@style/AppTextViewStyle</item>
+    </style>
+    
+    <style name="AppTextViewStyle" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="DetailText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
+    <style name="spinner_style" parent="android:Widget.DeviceDefault.Spinner">
+        <item name="android:background">@drawable/bgr_spinner</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:dropDownWidth">533dp</item>
+        <item name="android:showDividers">none</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:dropDownHeight">70dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+    </style>
+
+    <style name="SpinnerItem">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">7dp</item>
+    </style>
+    <style name="SpinnerDropDownItem">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">7dp</item>
+    </style>
+</resources>

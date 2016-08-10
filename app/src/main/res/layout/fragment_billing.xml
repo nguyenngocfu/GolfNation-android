@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent" tools:context="com.golf.golfnation.billing.BillingFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BILLING"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textAllCaps="true"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/paypal_title"/>
+
+    <EditText
+        android:id="@+id/paypal_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:hint="@string/user_hint"
+        android:paddingLeft="10dp"
+        android:background="@drawable/round_bg"/>
+    <EditText
+        android:id="@+id/paypal_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:hint="Email"
+        android:paddingLeft="10dp"
+        android:background="@drawable/round_bg"/>
+
+    <Button
+        android:id="@+id/paypal_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Log In"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:background="@drawable/round_bluebg"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/divider"/>
+
+    <Button
+        android:id="@+id/paypal_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Edit"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:background="@drawable/round_bg"/>
+    <Button
+        android:id="@+id/paypal_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Save Payment"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:background="@drawable/save"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/divider"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Pay with Debit/Credit Card"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/paymend_method"/>
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

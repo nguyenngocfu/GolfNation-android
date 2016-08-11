@@ -77,7 +77,7 @@ public class MyProfileFragment extends Fragment {
 
         UserDetail userDetail = ((Golfnation)getActivity().getApplication()).getUserDetail();
         ImageView ivProfile = (ImageView) v.findViewById(R.id.profile_img);
-        Picasso.with(getActivity()).load(userDetail.getPhotoName()).transform(new CircleTransform()).into(ivProfile);
+        Picasso.with(getActivity()).load(userDetail.getPhotoName()).resize(400,400).transform(new CircleTransform()).into(ivProfile);
         TextView tvName = (TextView) v.findViewById(R.id.name);
         tvName.setText(userDetail.getFirstname() + " " + userDetail.getLastname());
        /* TextView tvAddress = (TextView) v.findViewById(R.id.city);

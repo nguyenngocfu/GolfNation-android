@@ -2,6 +2,7 @@ package com.golf.golfnation.user.controller;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,11 +35,13 @@ import com.golf.golfnation.common.RequestManager;
 import com.golf.golfnation.common.model.PhotoDetail;
 import com.golf.golfnation.common.model.UploadPhotoResponse;
 import com.golf.golfnation.common.view.CircleTransform;
+import com.golf.golfnation.common.volley.MultipartRequest;
 import com.golf.golfnation.user.model.LoginResponse;
 import com.golf.golfnation.user.model.UserDetail;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -110,7 +114,7 @@ public class UpdateProfileFragment extends Fragment implements Constants {
 
         UserDetail userDetail = ((Golfnation)getActivity().getApplication()).getUserDetail();
         ivProfile = (ImageView) v.findViewById(R.id.profile_img);
-        Picasso.with(getActivity()).load(userDetail.getPhotoName()).transform(new CircleTransform()).into(ivProfile);
+        Picasso.with(getActivity()).load(userDetail.getPhotoName()).resize(400,400).transform(new CircleTransform()).into(ivProfile);
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,8 +149,9 @@ public class UpdateProfileFragment extends Fragment implements Constants {
                     //new UploadImageAsyncTask().execute();
                     //PhotoMultipartRequest
                     String url = UPLOAD_USER_PROFILE__URL;
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                            url, new Response.Listener<String>() {
+
+                    File filePart = ImageUtils.persistImage(getActivity().getApplicationContext(), resizedImage, getFileNameFromURI(imageUri));
+                    MultipartRequest stringRequest = new MultipartRequest(url, new Response.Listener<String>() {
 
                         @Override
                         public void onResponse(String response) {
@@ -163,6 +168,7 @@ public class UpdateProfileFragment extends Fragment implements Constants {
 
                             } else {
                                 completedUpload = true;
+                                updateProfile();
                             }
                             try {
                                 Log.e("RESPONSE", response);
@@ -181,19 +187,7 @@ public class UpdateProfileFragment extends Fragment implements Constants {
                             showProgress(false);
                             Log.d("ERROR", "Error [" + error + "]");
                         }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams() {
-                            Map<String, String> params = new HashMap<String, String>();
-                            Golfnation app = (Golfnation) getActivity().getApplication();
-                            params.put("uploaded_file", ImageUtils.getStringImage(resizedImage));
-                            params.put("user_id", app.getUserDetail().getUser_id());
-
-                            return params;
-
-                        }
-
-                    };
+                    }, filePart, ((Golfnation) getActivity().getApplication()).getUserDetail().getUser_id()) ;
                     stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     RequestManager.getInstance(getActivity()).getRequestQueue().add(stringRequest);
                 }
@@ -369,6 +363,22 @@ public class UpdateProfileFragment extends Fragment implements Constants {
                 .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    public String getFileNameFromURI(Uri uri) {
+        ContentResolver cr = getActivity().getApplicationContext().getContentResolver();
+        String[] projection = {MediaStore.MediaColumns.DISPLAY_NAME};
+        Cursor metaCursor = cr.query(uri, projection, null, null, null);
+        if (metaCursor != null) {
+            try {
+                if (metaCursor.moveToFirst()) {
+                    return metaCursor.getString(0);
+                }
+            } finally {
+                metaCursor.close();
+            }
+        }
+        return null;
     }
 
 }

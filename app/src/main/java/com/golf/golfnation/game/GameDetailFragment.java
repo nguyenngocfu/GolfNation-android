@@ -75,7 +75,7 @@ public class GameDetailFragment extends Fragment implements Constants, View.OnCl
     private OnFragmentInteractionListener mListener;
     private Game game;
     private AlertDialog alertDialog;
-    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
+    private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
 
     // note that these credentials will differ between live & sandbox environments.
     //private static final String CONFIG_CLIENT_ID = "AS0uAR1G_uJRFxHiGdPT4G9tVVNqvTGHCOJVFHgvatMr-XlqbDLnaNjD6wZUkC_-85n4CTBBa9MWiHYS";
@@ -328,7 +328,7 @@ public class GameDetailFragment extends Fragment implements Constants, View.OnCl
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
                             }
-                        });
+                        }).show();
 
 
                     }
@@ -364,9 +364,9 @@ public class GameDetailFragment extends Fragment implements Constants, View.OnCl
         if(item.getItemId() == R.id.action_share) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, game.getName() + "\n" + game.getCourse() + " " + game.getCity());
             sendIntent.setType("text/plain");
-            startActivity(Intent.createChooser(sendIntent, "Share"));
+            startActivity(Intent.createChooser(sendIntent, "Share via"));
         }
         return super.onOptionsItemSelected(item);
     }

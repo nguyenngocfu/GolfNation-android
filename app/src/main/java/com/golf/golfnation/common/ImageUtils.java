@@ -1,5 +1,6 @@
 package com.golf.golfnation.common;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -19,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -260,5 +263,22 @@ public class ImageUtils {
         }
 
         return result.toString();
+    }
+
+    public static File persistImage(Context context, Bitmap bitmap, String name) {
+        File filesDir = context.getFilesDir();
+        File imageFile = new File(filesDir, name + ".jpg");
+
+        OutputStream os;
+        try {
+            os = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+            os.flush();
+            os.close();
+            return imageFile;
+        } catch (Exception e) {
+            Log.e("ImageUtils", "Error writing bitmap", e);
+        }
+        return null;
     }
 }

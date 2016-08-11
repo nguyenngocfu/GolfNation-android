@@ -21,7 +21,7 @@ public class MultipartRequest extends Request<String> {
     private final File mFilePart;
     private final String mStringPart;
 
-    public MultipartRequest(String url, Response.ErrorListener errorListener, Response.Listener<String> listener, File file, String stringPart) {
+    public MultipartRequest(String url,Response.Listener<String> listener, Response.ErrorListener errorListener,  File file, String stringPart) {
         super(Method.POST, url, errorListener);
 
         mListener = listener;
@@ -54,7 +54,7 @@ public class MultipartRequest extends Request<String> {
 
     @Override
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
-        return Response.success("Uploaded", getCacheEntry());
+        return Response.success(new String(response.data), getCacheEntry());
     }
 
     @Override

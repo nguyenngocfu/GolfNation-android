@@ -65,6 +65,13 @@ public class ImageUtils {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+    public static byte[] getBinaryData(Bitmap bmp) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return byteArray;
+    }
+
     public static Bitmap resizeBitmap(Bitmap bmp, int targetW, int targetH) {
         double xFactor = 0;
         double width = Double.valueOf(bmp.getWidth());

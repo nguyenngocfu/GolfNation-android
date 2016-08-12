@@ -56,6 +56,8 @@ public class NavigationDrawerFragment extends Fragment {
      * Helper component that ties the action bar to the navigation drawer.
      */
     private ActionBarDrawerToggle mDrawerToggle;
+    private NavigationAdapter adapter;
+
     public ActionBarDrawerToggle getmDrawerToggle() {
         return mDrawerToggle;
     }
@@ -112,7 +114,7 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        NavigationAdapter adapter = new NavigationAdapter(getActivity());
+        adapter = new NavigationAdapter(getActivity());
         List<NavigationItem> navList = new ArrayList<>();
         NavigationItem findGame = new NavigationItem("Find Game", R.drawable.ic_find);
         NavigationItem manageGames = new NavigationItem("Manage Games", R.drawable.ic_manage);
@@ -140,6 +142,9 @@ public class NavigationDrawerFragment extends Fragment {
         return menuView;
     }
 
+    public void updateMenu(NavigationItem menu, int index) {
+        adapter.updateItem(menu, index);
+    }
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }

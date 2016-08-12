@@ -19,6 +19,7 @@ import com.golf.golfnation.Golfnation;
 import com.golf.golfnation.R;
 import com.golf.golfnation.common.view.CircleTransform;
 import com.golf.golfnation.user.model.UserDetail;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 
@@ -41,6 +42,7 @@ public class MyProfileFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private ImageView ivProfile;
 
     /**
      * Use this factory method to create a new instance of
@@ -70,14 +72,21 @@ public class MyProfileFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        UserDetail userDetail = ((Golfnation)getActivity().getApplication()).getUserDetail();
+        Picasso.with(getActivity()).load(userDetail.getPhotoName()).resize(400,400).memoryPolicy(MemoryPolicy.NO_CACHE).transform(new CircleTransform()).into(ivProfile);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         UserDetail userDetail = ((Golfnation)getActivity().getApplication()).getUserDetail();
-        ImageView ivProfile = (ImageView) v.findViewById(R.id.profile_img);
-        Picasso.with(getActivity()).load(userDetail.getPhotoName()).resize(400,400).transform(new CircleTransform()).into(ivProfile);
+        ivProfile = (ImageView) v.findViewById(R.id.profile_img);
+        Picasso.with(getActivity()).load(userDetail.getPhotoName()).resize(400,400).memoryPolicy(MemoryPolicy.NO_CACHE).transform(new CircleTransform()).into(ivProfile);
         TextView tvName = (TextView) v.findViewById(R.id.name);
         tvName.setText(userDetail.getFirstname() + " " + userDetail.getLastname());
        /* TextView tvAddress = (TextView) v.findViewById(R.id.city);

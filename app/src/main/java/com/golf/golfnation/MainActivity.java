@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
 import com.golf.golfnation.common.Constants;
 import com.golf.golfnation.common.PreferenceManager;
+import com.golf.golfnation.common.event.ProfileUpdateEvent;
 import com.golf.golfnation.game.MyGamesFragment;
 import com.golf.golfnation.user.controller.LoginActivity;
 import com.golf.golfnation.user.controller.MyProfileFragment;
@@ -21,6 +23,10 @@ import com.golf.golfnation.billing.OrderHistoryFragment;
 import com.golf.golfnation.game.CreateGameFragment;
 import com.golf.golfnation.game.GamesFragment;
 import com.golf.golfnation.game.ManagedGamesFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -54,6 +60,22 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+        EventBus.getDefault().register(this);
+    }
+
+    // This method will be called when a MessageEvent is posted (in the UI thread for Toast)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(ProfileUpdateEvent event) {
+        Log.i("Event", event.getPhotoURL());
+        NavigationItem profile = new NavigationItem("My Profile", 0);
+        profile.setImageURL(event.getPhotoURL());
+        mNavigationDrawerFragment.updateMenu(profile, 0);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

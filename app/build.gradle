@@ -30,4 +30,5 @@ dependencies {
         exclude module: 'org.apache.httpcomponents:httpclient'
     }
     compile 'com.paypal.sdk:paypal-android-sdk:2.14.4'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

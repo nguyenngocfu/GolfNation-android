@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import com.golf.golfnation.common.view.CircleTransform;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,6 +31,14 @@ public class NavigationAdapter extends BaseAdapter {
     public void setData(List<NavigationItem> menuItems) {
         this.menuItems = menuItems;
         notifyDataSetChanged();
+    }
+
+    public void updateItem(NavigationItem item, int index){
+        if((index < menuItems.size()) && index >=0 ) {
+            menuItems.get(index).setImageURL(item.getImageURL());
+            menuItems.get(index).setTitle(item.getTitle());
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -60,7 +69,7 @@ public class NavigationAdapter extends BaseAdapter {
         viewHoder.tvTitle.setText(menuItems.get(i).getTitle());
 
         if(menuItems.get(i).getImageURL() != null) {
-            Picasso.with(context).load(menuItems.get(i).getImageURL()).transform(new CircleTransform()).into(viewHoder.ivIcon);
+            Picasso.with(context).load(menuItems.get(i).getImageURL()).memoryPolicy(MemoryPolicy.NO_CACHE).transform(new CircleTransform()).into(viewHoder.ivIcon);
         }
         return view;
     }
